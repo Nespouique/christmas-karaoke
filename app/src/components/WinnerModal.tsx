@@ -3,7 +3,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/u
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import {Gift, Music } from 'lucide-react';
+import { Gift, Music, Snowflake, TreePine, Star, Sparkles } from 'lucide-react';
 import type { Participant, Song } from '@/types';
 import { getRandomPunchline, getRandomSong } from '@/lib/supabase-storage';
 
@@ -16,7 +16,7 @@ interface WinnerModalProps {
 }
 
 export function WinnerModal({ winner, isOpen, onClose, onGoToSongs, songs }: WinnerModalProps) {
-  const [punchline, setPunchline] = useState<string>("Une voix d'ange de Noël");
+  const [punchline, setPunchline] = useState<string>("Une voix d'ange de Noel");
   const [assignedSong, setAssignedSong] = useState<Song | null>(null);
   const [showSong, setShowSong] = useState(false);
 
@@ -57,38 +57,51 @@ export function WinnerModal({ winner, isOpen, onClose, onGoToSongs, songs }: Win
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-md">
-        <button
-          onClick={onClose}
-          className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100"
-        >
-          <span className="sr-only">Close</span>
-        </button>
-        
-        <DialogHeader className="text-center">
+      <DialogContent className="sm:max-w-md overflow-hidden">
+        {/* Christmas decorations - positioned in corners */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <Snowflake className="absolute -top-1 -left-1 w-8 h-8 text-white/10" />
+          <Snowflake className="absolute top-1 right-12 w-4 h-4 text-white/10" />
+          <Star className="absolute top-41 -right-1 w-8 h-8 text-white/10" />
+          <TreePine className="absolute top-51 left-5 w-8 h-8 text-white/10" />
+          <TreePine className="absolute -bottom-2 -right-1 w-10 h-10 text-white/10" />
+          <Snowflake className="absolute -bottom-1 left-8 w-5 h-5 text-white/10" />
+          <Star className="absolute bottom-12 -left-2 w-6 h-6 text-white/10" />
+        </div>
+
+        <DialogHeader className="text-center relative z-10">
           <DialogTitle className="text-2xl font-bold text-center">
             C'est ton moment !
           </DialogTitle>
         </DialogHeader>
 
-        <div className="flex flex-col items-center gap-4 py-4">
-          {/* Avatar */}
-          <Avatar className="w-24 h-24">
-            <AvatarImage src={winner.photo_url || undefined} alt={winner.name} />
-            <AvatarFallback
-              className="text-2xl font-bold"
-              style={{ backgroundColor: winner.color, color: 'white' }}
-            >
-              {getInitials(winner.name)}
-            </AvatarFallback>
-          </Avatar>
+        <div className="flex flex-col items-center gap-4 py-4 relative z-10">
+          {/* Avatar with glowing border */}
+          <div
+            className="rounded-full p-1"
+            style={{
+              background: 'linear-gradient(135deg, #30e87a 0%, #22c55e 50%, #30e87a 100%)',
+              boxShadow: '0 0 20px rgba(48, 232, 122, 0.4), 0 0 40px rgba(48, 232, 122, 0.2)'
+            }}
+          >
+            <Avatar className="w-24 h-24 border-4 border-background">
+              <AvatarImage src={winner.photo_url || undefined} alt={winner.name} />
+              <AvatarFallback
+                className="text-2xl font-bold"
+                style={{ backgroundColor: winner.color, color: 'white' }}
+              >
+                {getInitials(winner.name)}
+              </AvatarFallback>
+            </Avatar>
+          </div>
 
           {/* Name */}
           <h2 className="text-2xl font-bold">{winner.name}</h2>
 
           {/* Punchline badge */}
-          <Badge variant="secondary" className="text-sm px-3 py-1">
-            ✨ {punchline}
+          <Badge variant="secondary" className="text-sm px-3 py-1 gap-1.5">
+            <Sparkles className="w-3.5 h-3.5" />
+            {punchline}
           </Badge>
 
           {/* Message */}
@@ -96,10 +109,10 @@ export function WinnerModal({ winner, isOpen, onClose, onGoToSongs, songs }: Win
             <>
               <div className="text-center space-y-2 mt-2">
                 <p className="text-lg font-semibold text-primary">
-                  Tu as été choisi par Papa Noël !
+                  Papa Noël a fait son choix !
                 </p>
                 <p className="text-muted-foreground text-sm">
-                  {assignedSong 
+                  {assignedSong
                     ? "Ouvre ton cadeau pour découvrir le beau chant que tu vas nous faire."
                     : "Choisis un chant de Noël à interpréter !"}
                 </p>
@@ -107,7 +120,7 @@ export function WinnerModal({ winner, isOpen, onClose, onGoToSongs, songs }: Win
 
               {/* Buttons */}
               <div className="flex flex-col gap-2 w-full mt-4">
-                <Button 
+                <Button
                   onClick={handleDiscoverSong}
                   className="w-full gap-2"
                   size="lg"
@@ -115,8 +128,8 @@ export function WinnerModal({ winner, isOpen, onClose, onGoToSongs, songs }: Win
                   <Gift className="w-5 h-5" />
                   {assignedSong ? "Découvrir mon chant" : "Voir les chants"}
                 </Button>
-                <Button 
-                  variant="ghost" 
+                <Button
+                  variant="ghost"
                   onClick={() => {
                     onGoToSongs();
                     onClose();
@@ -137,7 +150,7 @@ export function WinnerModal({ winner, isOpen, onClose, onGoToSongs, songs }: Win
               </div>
 
               <div className="flex flex-col gap-2 w-full mt-4">
-                <Button 
+                <Button
                   onClick={openSpotify}
                   className="w-full gap-2 bg-[#1DB954] hover:bg-[#1ed760]"
                   size="lg"
@@ -147,7 +160,7 @@ export function WinnerModal({ winner, isOpen, onClose, onGoToSongs, songs }: Win
                   </svg>
                   Ouvrir sur Spotify
                 </Button>
-                <Button 
+                <Button
                   variant="outline"
                   onClick={() => {
                     onGoToSongs();

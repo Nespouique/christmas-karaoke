@@ -50,8 +50,8 @@ export function ParticipantsTab({ participants, onAdd, onUpdate, onDelete }: Par
       <div className="flex-1 flex flex-col items-center p-4 gap-6 w-full overflow-hidden">
         {/* Subtitle & instruction */}
         <div className="text-center space-y-1 flex-shrink-0">
-          <p className="text-white/80 text-lg font-medium">Les lutins du Pere Noel</p>
-          <p className="text-white/50 text-sm">Ajoutez des participants a la liste</p>
+          <p className="text-white/80 text-lg font-medium">Les lutins du Père Noël</p>
+          <p className="text-white/50 text-sm">Ajoutez des participants à la liste</p>
         </div>
 
         {/* Participants grid */}
