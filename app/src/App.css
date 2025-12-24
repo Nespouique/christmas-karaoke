@@ -71,6 +71,15 @@ html, body, #root {
   height: 100%;
 }
 
+/* Subtle gradient background */
+.bg-gradient-christmas {
+  background: linear-gradient(180deg,
+    hsl(150 50% 8%) 0%,
+    hsl(150 45% 6%) 50%,
+    hsl(150 40% 5%) 100%
+  );
+}
+
 /* Animation for fade in */
 @keyframes fadeInDown {
   from {
