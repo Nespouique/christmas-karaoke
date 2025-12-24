@@ -19,63 +19,63 @@ export function SongsTab({ songs, onAdd, onDelete }: SongsTabProps) {
 
   return (
     <div className="relative flex flex-col h-full pb-20 overflow-hidden">
-      {/* Content - centered vertically */}
-      <div className="flex-1 flex flex-col items-center p-4 gap-10 w-full overflow-hidden">
+      {/* Content */}
+      <div className="flex-1 flex flex-col items-center p-4 gap-6 w-full overflow-hidden">
         {/* Subtitle & instruction */}
-        <div className="text-center space-y-1">
+        <div className="text-center space-y-1 flex-shrink-0">
           <p className="text-white/80 text-lg font-medium">Nos plus belles chansons</p>
           <p className="text-white/50 text-sm">Retrouvez ici tous les chants</p>
         </div>
 
         {/* Songs list */}
-        <div className="w-full overflow-hidden">
-        <ScrollArea className="w-full max-h-[50vh]">
-        <div className="space-y-3 pb-4">
-          {songs.map((song) => (
-            <div 
-              key={song.id}
-              className="flex items-center gap-3 p-3 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-colors overflow-hidden min-w-0"
-            >
-              {/* Music icon badge */}
-              <div className="flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center bg-primary/20 text-primary">
-                <Music className="w-4 h-4" />
-              </div>
-
-              {/* Song info */}
-              <div className="flex-1 w-0">
-                <h3 className="font-medium truncate text-white">{song.title}</h3>
-                <p className="text-sm text-primary truncate">{song.artist}</p>
-              </div>
-
-              {/* Actions */}
-              <div className="flex items-center gap-1 flex-shrink-0">
-                <button
-                  onClick={() => openSpotify(song.spotify_url)}
-                  className="p-2 hover:bg-white/10 rounded-md transition-colors"
-                  title="Ouvrir sur Spotify"
+        <div className="w-full flex-1 overflow-hidden">
+          <ScrollArea className="h-full w-full">
+            <div className="space-y-3 pb-4">
+              {songs.map((song) => (
+                <div
+                  key={song.id}
+                  className="flex items-center gap-3 p-3 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-colors overflow-hidden min-w-0"
                 >
-                  <ExternalLink className="w-4 h-4 text-white/60" />
-                </button>
-                <button
-                  onClick={() => onDelete(song.id)}
-                  className="p-2 hover:bg-destructive/20 rounded-md transition-colors"
-                  title="Supprimer"
-                >
-                  <Trash2 className="w-4 h-4 text-destructive" />
-                </button>
-              </div>
-            </div>
-          ))}
+                  {/* Music icon badge */}
+                  <div className="flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center bg-primary/20 text-primary">
+                    <Music className="w-4 h-4" />
+                  </div>
 
-          {songs.length === 0 && (
-            <div className="text-center py-8 text-white/50">
-              <Music className="w-12 h-12 mx-auto mb-4 opacity-50" />
-              <p>Aucun chant ajouté</p>
-              <p className="text-sm">Ajoutez vos chants de Noël préférés !</p>
+                  {/* Song info */}
+                  <div className="flex-1 w-0">
+                    <h3 className="font-medium truncate text-white">{song.title}</h3>
+                    <p className="text-sm text-primary truncate">{song.artist}</p>
+                  </div>
+
+                  {/* Actions */}
+                  <div className="flex items-center gap-1 flex-shrink-0">
+                    <button
+                      onClick={() => openSpotify(song.spotify_url)}
+                      className="p-2 hover:bg-white/10 rounded-md transition-colors"
+                      title="Ouvrir sur Spotify"
+                    >
+                      <ExternalLink className="w-4 h-4 text-white/60" />
+                    </button>
+                    <button
+                      onClick={() => onDelete(song.id)}
+                      className="p-2 hover:bg-destructive/20 rounded-md transition-colors"
+                      title="Supprimer"
+                    >
+                      <Trash2 className="w-4 h-4 text-destructive" />
+                    </button>
+                  </div>
+                </div>
+              ))}
+
+              {songs.length === 0 && (
+                <div className="text-center py-8 text-white/50">
+                  <Music className="w-12 h-12 mx-auto mb-4 opacity-50" />
+                  <p>Aucun chant ajouté</p>
+                  <p className="text-sm">Ajoutez vos chants de Noël préférés !</p>
+                </div>
+              )}
             </div>
-          )}
-        </div>
-      </ScrollArea>
+          </ScrollArea>
         </div>
       </div>
 

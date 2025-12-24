@@ -72,23 +72,16 @@ export function WinnerModal({ winner, isOpen, onClose, onGoToSongs, songs }: Win
         </DialogHeader>
 
         <div className="flex flex-col items-center gap-4 py-4">
-          {/* Avatar with border color */}
-          <div className="relative">
-            <div 
-              className="rounded-full p-1"
-              style={{ backgroundColor: winner.color }}
+          {/* Avatar */}
+          <Avatar className="w-24 h-24">
+            <AvatarImage src={winner.photo_url || undefined} alt={winner.name} />
+            <AvatarFallback
+              className="text-2xl font-bold"
+              style={{ backgroundColor: winner.color, color: 'white' }}
             >
-              <Avatar className="w-24 h-24 border-4 border-white">
-                <AvatarImage src={winner.photo_url || undefined} alt={winner.name} />
-                <AvatarFallback 
-                  className="text-2xl font-bold"
-                  style={{ backgroundColor: winner.color, color: 'white' }}
-                >
-                  {getInitials(winner.name)}
-                </AvatarFallback>
-              </Avatar>
-            </div>
-          </div>
+              {getInitials(winner.name)}
+            </AvatarFallback>
+          </Avatar>
 
           {/* Name */}
           <h2 className="text-2xl font-bold">{winner.name}</h2>

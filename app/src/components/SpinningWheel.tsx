@@ -138,8 +138,8 @@ export const SpinningWheel = forwardRef<SpinningWheelHandle, SpinningWheelProps>
       const x = center + textRadius * Math.cos(midAngle);
       const y = center + textRadius * Math.sin(midAngle);
 
-      // Rotate text to follow the segment direction (radial)
-      const rotationAngle = index * segmentAngle + segmentAngle / 2;
+      // Rotate text to read from center outward (radial direction)
+      const rotationAngle = index * segmentAngle + segmentAngle / 2 - 90;
 
       return { x, y, rotation: rotationAngle };
     };
