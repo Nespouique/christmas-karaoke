@@ -1,0 +1,35 @@
+# Dependencies
+app/node_modules
+node_modules
+
+# Build output
+app/dist
+dist
+
+# Git
+.git
+.gitignore
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+
+# Documentation
+README.md
+SpecsNoel.md
+Wireframes
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environment files (handled via build args)
+.env
+.env.*
+!.env.example

@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C \"d:\\\\Elliot\\\\Documents\\\\git\\\\christmas-karaoke\" remote -v)"
+    ]
+  }
+}
