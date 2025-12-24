@@ -146,24 +146,24 @@ function App() {
           </div>
 
           {/* Bottom navigation */}
-          <TabsList className="fixed bottom-0 left-0 right-0 h-auto w-full rounded-none border-t border-white/10 bg-background/95 backdrop-blur-md p-2">
-            <TabsTrigger 
-              value="songs" 
-              className="flex flex-col items-center gap-1 px-3 py-2 text-white/50 data-[state=active]:text-primary data-[state=active]:bg-white/5 hover:text-white/80 transition-colors rounded-lg"
+          <TabsList className="fixed bottom-0 left-0 right-0 h-auto w-full rounded-none bg-background-muted px-4 py-3">
+            <TabsTrigger
+              value="songs"
+              className="relative flex flex-col items-center gap-1 px-6 py-2 border-none bg-transparent shadow-none data-[state=active]:bg-transparent data-[state=active]:shadow-none text-white/40 hover:text-white/60 transition-colors data-[state=active]:text-primary before:absolute before:-top-2 before:left-1/2 before:-translate-x-1/2 before:w-8 before:h-1 before:rounded-full before:bg-transparent data-[state=active]:before:bg-primary before:transition-colors"
             >
               <Music className="w-5 h-5" />
               <span className="text-xs font-medium">Chants</span>
             </TabsTrigger>
-            <TabsTrigger 
-              value="wheel" 
-              className="flex flex-col items-center gap-1 px-3 py-2 text-white/50 data-[state=active]:text-primary data-[state=active]:bg-white/5 hover:text-white/80 transition-colors rounded-lg"
+            <TabsTrigger
+              value="wheel"
+              className="relative flex flex-col items-center gap-1 px-6 py-2 border-none bg-transparent shadow-none data-[state=active]:bg-transparent data-[state=active]:shadow-none text-white/40 hover:text-white/60 transition-colors data-[state=active]:text-primary before:absolute before:-top-2 before:left-1/2 before:-translate-x-1/2 before:w-8 before:h-1 before:rounded-full before:bg-transparent data-[state=active]:before:bg-primary before:transition-colors"
             >
               <FerrisWheel className="w-5 h-5" />
               <span className="text-xs font-medium">Roue</span>
             </TabsTrigger>
-            <TabsTrigger 
-              value="participants" 
-              className="flex flex-col items-center gap-1 px-3 py-2 text-white/50 data-[state=active]:text-primary data-[state=active]:bg-white/5 hover:text-white/80 transition-colors rounded-lg"
+            <TabsTrigger
+              value="participants"
+              className="relative flex flex-col items-center gap-1 px-6 py-2 border-none bg-transparent shadow-none data-[state=active]:bg-transparent data-[state=active]:shadow-none text-white/40 hover:text-white/60 transition-colors data-[state=active]:text-primary before:absolute before:-top-2 before:left-1/2 before:-translate-x-1/2 before:w-8 before:h-1 before:rounded-full before:bg-transparent data-[state=active]:before:bg-primary before:transition-colors"
             >
               <Users className="w-5 h-5" />
               <span className="text-xs font-medium">Participants</span>
