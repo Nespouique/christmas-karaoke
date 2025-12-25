@@ -26,7 +26,7 @@ export function SongsTab({ songs, onAdd, onDelete }: SongsTabProps) {
   const [songToDelete, setSongToDelete] = useState<Song | null>(null);
 
   return (
-    <div className="relative flex flex-col h-full pb-20 overflow-hidden">
+    <div className="relative flex flex-col h-full overflow-hidden">
       {/* Falling snow */}
       <Snowfall count={40} />
 
@@ -41,7 +41,7 @@ export function SongsTab({ songs, onAdd, onDelete }: SongsTabProps) {
         {/* Songs list */}
         <div className="w-full flex-1 overflow-hidden">
           <ScrollArea className="h-full w-full">
-            <div className="space-y-3 pb-4">
+            <div className="space-y-3 pb-20">
               {songs.map((song) => (
                 <a
                   key={song.id}

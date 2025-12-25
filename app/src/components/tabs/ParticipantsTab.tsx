@@ -46,7 +46,7 @@ export function ParticipantsTab({ participants, onAdd, onUpdate, onDelete }: Par
   };
 
   return (
-    <div className="relative flex flex-col h-full pb-20 overflow-hidden">
+    <div className="relative flex flex-col h-full overflow-hidden">
       {/* Falling snow */}
       <Snowfall count={40} />
 
@@ -61,7 +61,7 @@ export function ParticipantsTab({ participants, onAdd, onUpdate, onDelete }: Par
         {/* Participants grid */}
         <div className="w-full flex-1 overflow-hidden">
           <ScrollArea className="h-full w-full">
-            <div className="grid grid-cols-3 gap-3 pb-4">
+            <div className="grid grid-cols-3 gap-3 pb-20">
               {participants.map((participant) => (
                 <div
                   key={participant.id}
