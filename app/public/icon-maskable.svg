@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- Maskable icon needs safe zone padding (10% on each side) -->
+  <rect width="512" height="512" fill="#112117"/>
+  <text x="256" y="320" font-size="260" text-anchor="middle">🎄</text>
+</svg>

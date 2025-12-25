@@ -61,10 +61,9 @@ export function WheelTab({ participants, songs, onGoToSongs }: WheelTabProps) {
         <button
           onClick={handleSpin}
           disabled={isSpinning || participants.length === 0}
-          className="spin-button relative group cursor-pointer flex items-center justify-center overflow-hidden rounded-xl h-12 px-8 bg-primary hover:bg-[#d43030] transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_0_20px_rgba(196,40,40,0.5),0_0_40px_rgba(196,40,40,0.3)]"
+          className="spin-button cursor-pointer flex items-center justify-center rounded-xl h-12 px-8 bg-primary hover:bg-[#d43030] active:scale-95 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_0_20px_rgba(196,40,40,0.5),0_0_40px_rgba(196,40,40,0.3)]"
         >
-          <span className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-          <span className="relative text-primary-foreground text-sm font-extrabold leading-normal tracking-wide uppercase flex items-center gap-2">
+          <span className="text-primary-foreground text-sm font-extrabold leading-normal tracking-wide uppercase">
             Lancer la Roue
           </span>
         </button>

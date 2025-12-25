@@ -3,7 +3,9 @@
     "allow": [
       "Bash(git -C \"d:\\\\Elliot\\\\Documents\\\\git\\\\christmas-karaoke\" remote -v)",
       "Bash(claude mcp add lucide-icons npx lucide-icons-mcp --stdio)",
-      "Bash(npx shadcn@latest add alert-dialog:*)"
+      "Bash(npx shadcn@latest add alert-dialog:*)",
+      "Bash(npm install:*)",
+      "Bash(npm run build:*)"
     ]
   },
   "enableAllProjectMcpServers": true,
