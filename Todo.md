@@ -8,4 +8,4 @@
 * ~~Après débranchement sur l'appli spotify, on reste bloqué sur la page Chants et les autres onglets ne réagissent plus au clic~~
 * ~~Bruit de la roue~~
 * ~~Installation de l'app~~
-* Faire un readme propre
+* ~~Faire un readme propre~~
