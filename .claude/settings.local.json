@@ -1,7 +1,13 @@
 {
   "permissions": {
     "allow": [
-      "Bash(git -C \"d:\\\\Elliot\\\\Documents\\\\git\\\\christmas-karaoke\" remote -v)"
+      "Bash(git -C \"d:\\\\Elliot\\\\Documents\\\\git\\\\christmas-karaoke\" remote -v)",
+      "Bash(claude mcp add lucide-icons npx lucide-icons-mcp --stdio)",
+      "Bash(npx shadcn@latest add alert-dialog:*)"
     ]
-  }
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "supabase"
+  ]
 }

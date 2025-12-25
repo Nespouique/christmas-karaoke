@@ -1,5 +1,8 @@
 import {
   useState,
+  useRef,
+  useEffect,
+  useCallback,
   forwardRef,
   useImperativeHandle,
 } from "react";
@@ -8,6 +11,40 @@ import type { Participant } from "@/types";
 
 export interface SpinningWheelHandle {
   spin: () => void;
+}
+
+// Hook for tick sound using Web Audio API
+function useTickSound() {
+  const audioContextRef = useRef<AudioContext | null>(null);
+
+  const playTick = useCallback((volume: number = 1) => {
+    try {
+      if (!audioContextRef.current) {
+        audioContextRef.current = new (window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext)();
+      }
+
+      const ctx = audioContextRef.current;
+      const oscillator = ctx.createOscillator();
+      const gainNode = ctx.createGain();
+
+      oscillator.connect(gainNode);
+      gainNode.connect(ctx.destination);
+
+      oscillator.frequency.value = 400;
+      oscillator.type = "triangle";
+
+      const maxGain = 0.15 * volume;
+      gainNode.gain.setValueAtTime(maxGain, ctx.currentTime);
+      gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.05);
+
+      oscillator.start(ctx.currentTime);
+      oscillator.stop(ctx.currentTime + 0.05);
+    } catch {
+      // Audio not supported, silently fail
+    }
+  }, []);
+
+  return playTick;
 }
 
 interface SpinningWheelProps {
@@ -25,6 +62,10 @@ export const SpinningWheel = forwardRef<SpinningWheelHandle, SpinningWheelProps>
     ref
   ) {
     const [rotation, setRotation] = useState(0);
+    const wheelRef = useRef<HTMLDivElement>(null);
+    const lastSegmentRef = useRef<number>(0);
+    const animationFrameRef = useRef<number>(0);
+    const playTick = useTickSound();
 
     // Add "Rejoue" if even number of participants for color alternation
     const getWheelSegments = () => {
@@ -48,6 +89,53 @@ export const SpinningWheel = forwardRef<SpinningWheelHandle, SpinningWheelProps>
     const segments = getWheelSegments();
     const segmentCount = segments.length || 1;
     const segmentAngle = 360 / segmentCount;
+
+    // Track rotation during spin and play tick sounds
+    useEffect(() => {
+      if (!isSpinning || !wheelRef.current || segments.length === 0) {
+        return;
+      }
+
+      const startTime = Date.now();
+      const muteTime = 1000; // 1 second mute
+      const fadeInDuration = 500; // 0.5 second fade in
+
+      const trackRotation = () => {
+        if (!wheelRef.current) return;
+
+        const style = window.getComputedStyle(wheelRef.current);
+        const transform = style.transform;
+
+        if (transform && transform !== "none") {
+          const values = transform.split("(")[1].split(")")[0].split(",");
+          const a = parseFloat(values[0]);
+          const b = parseFloat(values[1]);
+          const angle = Math.round(Math.atan2(b, a) * (180 / Math.PI));
+          const normalizedAngle = ((angle % 360) + 360) % 360;
+          const currentSegment = Math.floor(normalizedAngle / segmentAngle);
+
+          if (currentSegment !== lastSegmentRef.current) {
+            const elapsed = Date.now() - startTime;
+            if (elapsed >= muteTime) {
+              // Calculate fade-in volume (0 to 1 over fadeInDuration)
+              const fadeProgress = Math.min((elapsed - muteTime) / fadeInDuration, 1);
+              playTick(fadeProgress);
+            }
+            lastSegmentRef.current = currentSegment;
+          }
+        }
+
+        animationFrameRef.current = requestAnimationFrame(trackRotation);
+      };
+
+      animationFrameRef.current = requestAnimationFrame(trackRotation);
+
+      return () => {
+        if (animationFrameRef.current) {
+          cancelAnimationFrame(animationFrameRef.current);
+        }
+      };
+    }, [isSpinning, segmentAngle, segments.length, playTick]);
 
     const spin = (forceRespin = false) => {
       if ((!forceRespin && isSpinning) || segments.length === 0) return;
@@ -161,6 +249,7 @@ export const SpinningWheel = forwardRef<SpinningWheelHandle, SpinningWheelProps>
 
         {/* Wheel */}
         <div
+          ref={wheelRef}
           className="relative"
           style={{
             transform: `rotate(${rotation}deg)`,

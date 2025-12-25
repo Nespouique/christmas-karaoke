@@ -1,5 +1,15 @@
 import { useState, useRef, useEffect } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -21,6 +31,7 @@ export function ParticipantModal({ isOpen, onClose, onSave, onDelete, participan
   const [photoUrl, setPhotoUrl] = useState<string | null>(participant?.photo_url || null);
   const [photoPreview, setPhotoPreview] = useState<string | null>(participant?.photo_url || null);
   const [imageToCrop, setImageToCrop] = useState<string | null>(null);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handlePhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -99,6 +110,7 @@ export function ParticipantModal({ isOpen, onClose, onSave, onDelete, participan
   };
 
   return (
+    <>
     <Dialog open={isOpen} onOpenChange={handleClose}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
@@ -185,8 +197,8 @@ export function ParticipantModal({ isOpen, onClose, onSave, onDelete, participan
 
             {/* Delete button - only show in edit mode */}
             {onDelete && (
-              <Button 
-                onClick={onDelete}
+              <Button
+                onClick={() => setShowDeleteConfirm(true)}
                 variant="ghost"
                 className="w-full gap-2 text-destructive hover:text-destructive hover:bg-destructive/10"
                 size="lg"
@@ -199,5 +211,29 @@ export function ParticipantModal({ isOpen, onClose, onSave, onDelete, participan
         )}
       </DialogContent>
     </Dialog>
+
+    <AlertDialog open={showDeleteConfirm} onOpenChange={setShowDeleteConfirm}>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Supprimer ce participant ?</AlertDialogTitle>
+          <AlertDialogDescription>
+            Voulez-vous vraiment supprimer {participant?.name} ? Cette action est irréversible.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Annuler</AlertDialogCancel>
+          <AlertDialogAction
+            onClick={() => {
+              onDelete?.();
+              setShowDeleteConfirm(false);
+            }}
+            className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+          >
+            Supprimer
+          </AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+    </>
   );
 }

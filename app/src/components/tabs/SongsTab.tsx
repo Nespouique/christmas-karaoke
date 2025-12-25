@@ -1,7 +1,17 @@
 import { useState } from 'react';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { SongModal } from '@/components/SongModal';
-import { Plus, Trash2, ExternalLink, Music } from 'lucide-react';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog';
+import { Plus, Trash2, Music } from 'lucide-react';
 import type { Song } from '@/types';
 
 interface SongsTabProps {
@@ -12,10 +22,7 @@ interface SongsTabProps {
 
 export function SongsTab({ songs, onAdd, onDelete }: SongsTabProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const openSpotify = (url: string) => {
-    window.open(url, '_blank');
-  };
+  const [songToDelete, setSongToDelete] = useState<Song | null>(null);
 
   return (
     <div className="relative flex flex-col h-full pb-20 overflow-hidden">
@@ -35,9 +42,12 @@ export function SongsTab({ songs, onAdd, onDelete }: SongsTabProps) {
           <ScrollArea className="h-full w-full">
             <div className="space-y-3 pb-4">
               {songs.map((song) => (
-                <div
+                <a
                   key={song.id}
-                  className="flex items-center gap-3 p-3 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-colors overflow-hidden min-w-0"
+                  href={song.spotify_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full flex items-center gap-3 p-3 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-colors overflow-hidden min-w-0 text-left cursor-pointer"
                 >
                   {/* Music icon badge */}
                   <div className="flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center bg-primary/20 text-primary">
@@ -50,24 +60,20 @@ export function SongsTab({ songs, onAdd, onDelete }: SongsTabProps) {
                     <p className="text-sm text-primary truncate">{song.artist}</p>
                   </div>
 
-                  {/* Actions */}
-                  <div className="flex items-center gap-1 flex-shrink-0">
-                    <button
-                      onClick={() => openSpotify(song.spotify_url)}
-                      className="p-2 hover:bg-white/10 rounded-md transition-colors"
-                      title="Ouvrir sur Spotify"
-                    >
-                      <ExternalLink className="w-4 h-4 text-white/60" />
-                    </button>
-                    <button
-                      onClick={() => onDelete(song.id)}
-                      className="p-2 hover:bg-destructive/20 rounded-md transition-colors"
-                      title="Supprimer"
-                    >
-                      <Trash2 className="w-4 h-4 text-destructive" />
-                    </button>
-                  </div>
-                </div>
+                  {/* Delete button */}
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      setSongToDelete(song);
+                    }}
+                    className="flex-shrink-0 p-2 hover:bg-destructive/20 rounded-md transition-colors"
+                    title="Supprimer"
+                  >
+                    <Trash2 className="w-4 h-4 text-destructive" />
+                  </button>
+                </a>
               ))}
 
               {songs.length === 0 && (
@@ -96,6 +102,31 @@ export function SongsTab({ songs, onAdd, onDelete }: SongsTabProps) {
         onClose={() => setIsModalOpen(false)}
         onSave={onAdd}
       />
+
+      <AlertDialog open={!!songToDelete} onOpenChange={(open) => !open && setSongToDelete(null)}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Supprimer ce chant ?</AlertDialogTitle>
+            <AlertDialogDescription>
+              Voulez-vous vraiment supprimer "{songToDelete?.title}" de {songToDelete?.artist} ? Cette action est irréversible.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Annuler</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={() => {
+                if (songToDelete) {
+                  onDelete(songToDelete.id);
+                  setSongToDelete(null);
+                }
+              }}
+              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+            >
+              Supprimer
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }
