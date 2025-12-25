@@ -250,7 +250,8 @@ export const SpinningWheel = forwardRef<SpinningWheelHandle, SpinningWheelProps>
         {/* Wheel */}
         <div
           ref={wheelRef}
-          className="relative"
+          className={`relative ${!isSpinning && segments.length > 0 ? 'cursor-pointer' : ''}`}
+          onClick={() => !isSpinning && segments.length > 0 && spin()}
           style={{
             transform: `rotate(${rotation}deg)`,
             transition: isSpinning
