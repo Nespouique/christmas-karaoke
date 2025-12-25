@@ -2,7 +2,7 @@ import { useState, useRef } from 'react';
 import { SpinningWheel } from '@/components/SpinningWheel';
 import type { SpinningWheelHandle } from '@/components/SpinningWheel';
 import { WinnerModal } from '@/components/WinnerModal';
-import { Dices } from 'lucide-react';
+import { Snowfall } from '@/components/Snowfall';
 import type { Participant, Song } from '@/types';
 
 interface WheelTabProps {
@@ -35,8 +35,8 @@ export function WheelTab({ participants, songs, onGoToSongs }: WheelTabProps) {
 
   return (
     <div className="relative flex flex-col h-full w-full pb-20">
-      {/* Snow overlay pattern */}
-      <div className="absolute inset-0 snow-overlay pointer-events-none" />
+      {/* Falling snow */}
+      <Snowfall count={40} />
 
       {/* Content - centered vertically */}
       <div className="flex-1 flex flex-col items-center justify-center p-4 gap-16 z-10">

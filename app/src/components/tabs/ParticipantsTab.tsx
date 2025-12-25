@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { ParticipantModal } from '@/components/ParticipantModal';
+import { Snowfall } from '@/components/Snowfall';
 import { Plus, Users } from 'lucide-react';
 import type { Participant } from '@/types';
 
@@ -46,8 +47,8 @@ export function ParticipantsTab({ participants, onAdd, onUpdate, onDelete }: Par
 
   return (
     <div className="relative flex flex-col h-full pb-20 overflow-hidden">
-      {/* Snow overlay pattern */}
-      <div className="absolute inset-0 snow-overlay pointer-events-none" />
+      {/* Falling snow */}
+      <Snowfall count={40} />
 
       {/* Content */}
       <div className="flex-1 flex flex-col items-center p-4 gap-6 w-full overflow-hidden relative z-10">

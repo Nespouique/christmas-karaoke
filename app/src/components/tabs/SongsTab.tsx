@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { SongModal } from '@/components/SongModal';
+import { Snowfall } from '@/components/Snowfall';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -26,8 +27,8 @@ export function SongsTab({ songs, onAdd, onDelete }: SongsTabProps) {
 
   return (
     <div className="relative flex flex-col h-full pb-20 overflow-hidden">
-      {/* Snow overlay pattern */}
-      <div className="absolute inset-0 snow-overlay pointer-events-none" />
+      {/* Falling snow */}
+      <Snowfall count={40} />
 
       {/* Content */}
       <div className="flex-1 flex flex-col items-center p-4 gap-6 w-full overflow-hidden relative z-10">

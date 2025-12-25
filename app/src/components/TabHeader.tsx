@@ -3,8 +3,8 @@ interface TabHeaderProps {
 }
 
 const TAB_TITLES = {
-  wheel: 'Karaoke de Papa Noel',
-  songs: 'Chants de Noel',
+  wheel: 'Karaoké de Papa Noël',
+  songs: 'Chants de Noël',
   participants: 'Participants'
 } as const;
 

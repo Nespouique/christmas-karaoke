@@ -5,11 +5,67 @@ body {
   font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
-/* Snow overlay pattern */
-.snow-overlay {
-  background-image: radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1.5px);
-  background-size: 24px 24px;
-  opacity: 0.3;
+/* Falling snow animation */
+.snow-container {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.snowflake {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0;
+  animation: fall linear infinite;
+  /* Radial gradient: solid center fading to transparent edges */
+  background: radial-gradient(circle,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 0.6) 40%,
+    rgba(255, 255, 255, 0) 70%
+  );
+}
+
+@keyframes fall {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px) translateX(0);
+  }
+  10% {
+    opacity: 1;
+  }
+  25% {
+    transform: translateY(25vh) translateX(15px);
+  }
+  50% {
+    transform: translateY(50vh) translateX(-10px);
+  }
+  75% {
+    transform: translateY(75vh) translateX(20px);
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(100vh) translateX(-5px);
+  }
+}
+
+/* Different snowflake sizes */
+.snowflake.small {
+  width: 6px;
+  height: 6px;
+}
+
+.snowflake.medium {
+  width: 10px;
+  height: 10px;
+}
+
+.snowflake.large {
+  width: 16px;
+  height: 16px;
 }
 
 /* Wheel styles */

@@ -155,7 +155,7 @@ export function WinnerModal({ winner, isOpen, onClose, onGoToSongs, songs }: Win
               <div className="flex flex-col gap-2 w-full mt-4">
                 <Button
                   onClick={openSpotify}
-                  className="w-full gap-2 bg-[#1DB954] hover:bg-[#1ed760]"
+                  className="w-full gap-2"
                   size="lg"
                 >
                   <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
