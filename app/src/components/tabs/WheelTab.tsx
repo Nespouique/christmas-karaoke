@@ -39,7 +39,7 @@ export function WheelTab({ participants, songs, onGoToSongs }: WheelTabProps) {
       <Snowfall count={40} />
 
       {/* Content - centered vertically */}
-      <div className="flex-1 flex flex-col items-center justify-center p-4 gap-16 z-10">
+      <div className="flex-1 flex flex-col items-center justify-center p-4 gap-12 z-10">
         {/* Subtitle & instruction */}
         <div className="text-center space-y-1">
           <p className="text-white/80 text-lg font-medium">Qui va chanter ?</p>

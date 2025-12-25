@@ -122,9 +122,17 @@ body {
   background: rgba(196, 40, 40, 0.5);
 }
 
-/* Ensure full height */
+/* Ensure full height - use dvh for mobile browser compatibility */
 html, body, #root {
   height: 100%;
+  height: 100dvh;
+}
+
+/* Fix for mobile browser address bar */
+@supports (height: 100dvh) {
+  html, body, #root {
+    height: 100dvh;
+  }
 }
 
 /* Subtle gradient background */

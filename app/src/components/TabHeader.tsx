@@ -3,7 +3,7 @@ interface TabHeaderProps {
 }
 
 const TAB_TITLES = {
-  wheel: 'Karaoké de Papa Noël',
+  wheel: 'Karaoké de Noël',
   songs: 'Chants de Noël',
   participants: 'Participants'
 } as const;
@@ -15,7 +15,7 @@ export function TabHeader({ activeTab }: TabHeaderProps) {
     <header className="relative sticky top-0 z-30 bg-background/95 backdrop-blur-sm pt-10 pb-4 px-4 overflow-hidden">
       {/* Snow overlay */}
       <div className="absolute inset-0 snow-overlay pointer-events-none" />
-      <h1 className="relative text-primary text-3xl font-bold text-center z-10">{title}</h1>
+      <h1 className="relative text-primary text-4xl font-bold text-center z-10">{title}</h1>
     </header>
   );
 }

@@ -111,14 +111,14 @@ function App() {
   }
 
   return (
-    <div className="h-screen bg-background overflow-hidden">
+    <div className="h-dvh bg-background overflow-hidden">
       <div className="relative max-w-md mx-auto h-full flex flex-col">
         {/* Fixed Header */}
         <TabHeader activeTab={activeTab} />
         
         <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1 flex flex-col min-h-0">
-          {/* Content area */}
-          <div className="flex-1 min-h-0">
+          {/* Content area - pb-20 accounts for fixed bottom nav */}
+          <div className="flex-1 min-h-0 pb-20">
             <TabsContent value="wheel" className="h-full m-0 data-[state=active]:flex data-[state=active]:flex-col">
               <WheelTab 
                 participants={participants}
@@ -145,8 +145,8 @@ function App() {
             </TabsContent>
           </div>
 
-          {/* Bottom navigation */}
-          <TabsList className="fixed bottom-0 left-0 right-0 h-auto w-full rounded-none bg-background-muted px-4 py-3">
+          {/* Bottom navigation - z-50 ensures it stays above content on mobile */}
+          <TabsList className="fixed bottom-0 left-0 right-0 z-50 h-auto w-full rounded-none bg-background-muted px-4 py-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
             <TabsTrigger
               value="songs"
               className="relative flex flex-col items-center gap-1 px-6 py-2 border-none bg-transparent shadow-none data-[state=active]:bg-transparent data-[state=active]:shadow-none text-white/40 hover:text-white/60 transition-colors data-[state=active]:text-primary before:absolute before:-top-2 before:left-1/2 before:-translate-x-1/2 before:w-8 before:h-1 before:rounded-full before:bg-transparent data-[state=active]:before:bg-primary before:transition-colors"
