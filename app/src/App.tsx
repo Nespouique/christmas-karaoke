@@ -45,7 +45,7 @@ function App() {
   const handleAddParticipant = async (name: string, photoUrl: string | null) => {
     const newParticipant = await createParticipant(name, photoUrl, participants);
     if (newParticipant) {
-      setParticipants(prev => [...prev, newParticipant]);
+      setParticipants(prev => [...prev, newParticipant].sort((a, b) => a.name.localeCompare(b.name)));
       toast.success(`${name} a été ajouté !`);
     } else {
       toast.error("Erreur lors de l'ajout");
@@ -55,7 +55,7 @@ function App() {
   const handleUpdateParticipant = async (id: string, name: string, photoUrl: string | null) => {
     const updated = await updateParticipant(id, name, photoUrl);
     if (updated) {
-      setParticipants(prev => prev.map(p => p.id === id ? updated : p));
+      setParticipants(prev => prev.map(p => p.id === id ? updated : p).sort((a, b) => a.name.localeCompare(b.name)));
       toast.success('Participant modifié !');
     } else {
       toast.error("Erreur lors de la modification");
@@ -77,7 +77,7 @@ function App() {
   const handleAddSong = async (title: string, artist: string, spotifyUrl: string) => {
     const newSong = await createSong(title, artist, spotifyUrl);
     if (newSong) {
-      setSongs(prev => [...prev, newSong]);
+      setSongs(prev => [...prev, newSong].sort((a, b) => a.title.localeCompare(b.title)));
       toast.success(`"${title}" a été ajouté !`);
     } else {
       toast.error("Erreur lors de l'ajout");

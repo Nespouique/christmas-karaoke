@@ -21,7 +21,7 @@ export const fetchParticipants = async (): Promise<Participant[]> => {
   const { data, error } = await supabase
     .from('participants')
     .select('*')
-    .order('created_at', { ascending: true });
+    .order('name', { ascending: true });
   
   if (error) {
     console.error('Error fetching participants:', error);
@@ -88,7 +88,7 @@ export const fetchSongs = async (): Promise<Song[]> => {
   const { data, error } = await supabase
     .from('songs')
     .select('*')
-    .order('created_at', { ascending: true });
+    .order('title', { ascending: true });
   
   if (error) {
     console.error('Error fetching songs:', error);
