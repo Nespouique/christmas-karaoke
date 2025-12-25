@@ -1,7 +1,7 @@
 * Génération de tagline à la volée
 * Text to speech
 * Revoir le style pour avoir plusieurs couleurs plus Noël (et des boules de Noël ou flocons de neige)
-* Revoir le style de la tab bar
+* ~~Revoir le style de la tab bar~~
 * Effet de neige qui tombe sur l'écran
 * ~~Carte chant au global cliquable (pas besoin du bouton aller vers)~~
 * ~~Au clic sur supprimer mettre une modal attention~~

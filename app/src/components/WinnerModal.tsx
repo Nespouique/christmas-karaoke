@@ -80,8 +80,8 @@ export function WinnerModal({ winner, isOpen, onClose, onGoToSongs, songs }: Win
           <div
             className="rounded-full p-1"
             style={{
-              background: 'linear-gradient(135deg, #30e87a 0%, #22c55e 50%, #30e87a 100%)',
-              boxShadow: '0 0 20px rgba(48, 232, 122, 0.4), 0 0 40px rgba(48, 232, 122, 0.2)'
+              background: 'linear-gradient(135deg, #c42828 0%, #a82020 50%, #c42828 100%)',
+              boxShadow: '0 0 20px rgba(196, 40, 40, 0.4), 0 0 40px rgba(196, 40, 40, 0.2)'
             }}
           >
             <Avatar className="w-24 h-24 border-4 border-background">
@@ -99,7 +99,10 @@ export function WinnerModal({ winner, isOpen, onClose, onGoToSongs, songs }: Win
           <h2 className="text-2xl font-bold">{winner.name}</h2>
 
           {/* Punchline badge */}
-          <Badge variant="secondary" className="text-sm px-3 py-1 gap-1.5">
+          <Badge
+            variant="secondary"
+            className="text-sm px-3 py-1 gap-1.5"
+          >
             <Sparkles className="w-3.5 h-3.5" />
             {punchline}
           </Badge>

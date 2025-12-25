@@ -47,10 +47,10 @@ export function SongsTab({ songs, onAdd, onDelete }: SongsTabProps) {
                   href={song.spotify_url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full flex items-center gap-3 p-3 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-colors overflow-hidden min-w-0 text-left cursor-pointer"
+                  className="w-full flex items-center gap-3 p-3 bg-card/40 border border-white/10 rounded-lg hover:bg-card/50 transition-colors overflow-hidden min-w-0 text-left cursor-pointer"
                 >
                   {/* Music icon badge */}
-                  <div className="flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center bg-primary/20 text-primary">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center bg-white/20 text-primary-foreground">
                     <Music className="w-4 h-4" />
                   </div>
 
@@ -71,7 +71,7 @@ export function SongsTab({ songs, onAdd, onDelete }: SongsTabProps) {
                     className="flex-shrink-0 p-2 hover:bg-destructive/20 rounded-md transition-colors"
                     title="Supprimer"
                   >
-                    <Trash2 className="w-4 h-4 text-destructive" />
+                    <Trash2 className="w-4 h-4 text-destructive-foreground" />
                   </button>
                 </a>
               ))}
@@ -91,7 +91,7 @@ export function SongsTab({ songs, onAdd, onDelete }: SongsTabProps) {
       {/* Floating add button */}
       <button
         onClick={() => setIsModalOpen(true)}
-        className="fixed bottom-24 right-4 w-14 h-14 bg-primary hover:bg-[#28c769] text-primary-foreground rounded-full shadow-lg flex items-center justify-center transition-all hover:scale-105 z-20"
+        className="fixed bottom-24 right-4 w-14 h-14 bg-primary hover:bg-[#d43030] text-primary-foreground rounded-full shadow-lg flex items-center justify-center transition-all hover:scale-105 z-20"
         aria-label="Ajouter un chant"
       >
         <Plus className="w-6 h-6" />

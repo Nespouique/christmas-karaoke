@@ -65,7 +65,7 @@ export function ParticipantsTab({ participants, onAdd, onUpdate, onDelete }: Par
                 <div
                   key={participant.id}
                   onClick={() => handleEdit(participant)}
-                  className="flex flex-col items-center gap-3 p-4 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-colors cursor-pointer"
+                  className="flex flex-col items-center gap-3 p-4 bg-card/40 rounded-lg hover:bg-card/50 transition-colors cursor-pointer"
                 >
                   <Avatar className="w-16 h-16">
                     <AvatarImage src={participant.photo_url || undefined} alt={participant.name} />
@@ -97,7 +97,7 @@ export function ParticipantsTab({ participants, onAdd, onUpdate, onDelete }: Par
       {/* Floating add button */}
       <button
         onClick={() => setIsModalOpen(true)}
-        className="fixed bottom-24 right-4 w-14 h-14 bg-primary hover:bg-[#28c769] text-primary-foreground rounded-full shadow-lg flex items-center justify-center transition-all hover:scale-105 z-20"
+        className="fixed bottom-24 right-4 w-14 h-14 bg-primary hover:bg-[#d43030] text-primary-foreground rounded-full shadow-lg flex items-center justify-center transition-all hover:scale-105 z-20"
         aria-label="Ajouter un participant"
       >
         <Plus className="w-6 h-6" />

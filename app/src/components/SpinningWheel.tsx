@@ -6,7 +6,7 @@ import {
   forwardRef,
   useImperativeHandle,
 } from "react";
-import { Music } from "lucide-react";
+import { Gift } from "lucide-react";
 import type { Participant } from "@/types";
 
 export interface SpinningWheelHandle {
@@ -240,7 +240,7 @@ export const SpinningWheel = forwardRef<SpinningWheelHandle, SpinningWheelProps>
             width="24"
             height="24"
             viewBox="0 0 24 24"
-            fill="#30e87a"
+            fill="#c42828"
             className="drop-shadow-lg"
           >
             <path d="M12 18l-8-10h16l-8 10z" />
@@ -345,7 +345,7 @@ export const SpinningWheel = forwardRef<SpinningWheelHandle, SpinningWheelProps>
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center"
             style={{ width: innerRadius * 2, height: innerRadius * 2 }}
           >
-            <Music className="w-7 h-7 text-[#30e87a]" />
+            <Gift className="w-7 h-7 text-[#c42828]" />
           </div>
         </div>
 
