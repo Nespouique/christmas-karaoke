@@ -5,7 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Gift, Music, Snowflake, TreePine, Star, Sparkles } from 'lucide-react';
 import type { Participant, Song } from '@/types';
-import { getRandomPunchline, getRandomSong } from '@/lib/supabase-storage';
+import { getRandomSong } from '@/lib/supabase-storage';
 
 interface WinnerModalProps {
   winner: Participant | null;
@@ -13,18 +13,17 @@ interface WinnerModalProps {
   onClose: () => void;
   onGoToSongs: () => void;
   songs: Song[];
+  punchline: string;
 }
 
-export function WinnerModal({ winner, isOpen, onClose, onGoToSongs, songs }: WinnerModalProps) {
-  const [punchline, setPunchline] = useState<string>("Une voix d'ange de Noel");
+export function WinnerModal({ winner, isOpen, onClose, onGoToSongs, songs, punchline }: WinnerModalProps) {
   const [assignedSong, setAssignedSong] = useState<Song | null>(null);
   const [showSong, setShowSong] = useState(false);
 
-  // Load punchline and assign song when modal opens
+  // Assign song when modal opens
   useEffect(() => {
     if (isOpen && winner) {
       setShowSong(false);
-      getRandomPunchline().then(setPunchline);
       setAssignedSong(getRandomSong(songs));
     }
   }, [isOpen, winner, songs]);

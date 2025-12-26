@@ -162,3 +162,10 @@
   --color-sidebar-border: hsl(var(--sidebar-border));
   --color-sidebar-ring: hsl(var(--sidebar-ring));
 }
+
+/* Hide spin button on small height screens (user can click the wheel directly) */
+@media (max-height: 700px) {
+  .spin-button {
+    display: none;
+  }
+}

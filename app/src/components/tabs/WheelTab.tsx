@@ -3,6 +3,7 @@ import { SpinningWheel } from '@/components/SpinningWheel';
 import type { SpinningWheelHandle } from '@/components/SpinningWheel';
 import { WinnerModal } from '@/components/WinnerModal';
 import { Snowfall } from '@/components/Snowfall';
+import { getRandomPunchline } from '@/lib/supabase-storage';
 import type { Participant, Song } from '@/types';
 
 interface WheelTabProps {
@@ -15,6 +16,7 @@ export function WheelTab({ participants, songs, onGoToSongs }: WheelTabProps) {
   const [isSpinning, setIsSpinning] = useState(false);
   const [winner, setWinner] = useState<Participant | null>(null);
   const [showWinnerModal, setShowWinnerModal] = useState(false);
+  const [punchline, setPunchline] = useState<string>("Une voix d'ange de Noël");
   const wheelRef = useRef<SpinningWheelHandle>(null);
 
   const handleSpinEnd = (selectedParticipant: Participant) => {
@@ -29,6 +31,8 @@ export function WheelTab({ participants, songs, onGoToSongs }: WheelTabProps) {
 
   const handleSpin = () => {
     if (wheelRef.current && !isSpinning && participants.length > 0) {
+      // Preload punchline while wheel is spinning
+      getRandomPunchline().then(setPunchline);
       wheelRef.current.spin();
     }
   };
@@ -75,6 +79,7 @@ export function WheelTab({ participants, songs, onGoToSongs }: WheelTabProps) {
         onClose={handleCloseModal}
         onGoToSongs={onGoToSongs}
         songs={songs}
+        punchline={punchline}
       />
     </div>
   );
