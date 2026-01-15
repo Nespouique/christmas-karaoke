@@ -23,11 +23,14 @@ COPY tsconfig.json ./
 # Build TypeScript
 RUN npm run build
 
+# Install prisma globally (needed for migrate deploy and prisma studio)
+RUN npm install -g prisma
+
 # Remove dev dependencies
 RUN npm prune --omit=dev
 
 # Expose port
 EXPOSE 3001
 
-# Start server
-CMD ["sh", "-c", "npx prisma migrate deploy && node dist/index.js"]
+# Start server (prisma is installed globally)
+CMD ["sh", "-c", "prisma migrate deploy && node dist/index.js"]

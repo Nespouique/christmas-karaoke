@@ -51,7 +51,7 @@ services:
   prisma-studio:
     build: ./server
     container_name: christmas-karaoke-studio
-    command: npx prisma studio --port 5555 --browser none
+    command: prisma studio --port 5555 --browser none
     ports:
       - "5555:5555"
     depends_on:
