@@ -1,7 +1,8 @@
+import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
 import path from 'path';
-import { PrismaClient } from '@prisma/client';
+import { prisma } from './lib/prisma.js';
 import participantsRouter from './routes/participants.js';
 import songsRouter from './routes/songs.js';
 import punchlinesRouter from './routes/punchlines.js';
@@ -10,7 +11,8 @@ import spotifyRouter from './routes/spotify.js';
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-export const prisma = new PrismaClient();
+// Re-export prisma for routes
+export { prisma };
 
 // Middleware
 app.use(cors());

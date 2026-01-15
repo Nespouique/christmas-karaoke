@@ -6,7 +6,11 @@
       "Bash(npx shadcn@latest add alert-dialog:*)",
       "Bash(npm install:*)",
       "Bash(npm run build:*)",
-      "Bash(git -C /d/Elliot/Documents/git/christmas-karaoke log --oneline)"
+      "Bash(git -C /d/Elliot/Documents/git/christmas-karaoke log --oneline)",
+      "Bash(npx prisma validate:*)",
+      "mcp__context7__resolve-library-id",
+      "mcp__context7__query-docs",
+      "Bash(npx prisma generate:*)"
     ]
   },
   "enableAllProjectMcpServers": true,

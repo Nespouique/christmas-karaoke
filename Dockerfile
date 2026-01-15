@@ -26,7 +26,8 @@ COPY server/package*.json ./
 # Install backend dependencies
 RUN npm ci
 
-# Copy Prisma schema first for generation
+# Copy Prisma config and schema for generation (Prisma 7)
+COPY server/prisma.config.ts ./
 COPY server/prisma ./prisma
 
 # Generate Prisma client
@@ -47,12 +48,18 @@ WORKDIR /app
 COPY server/package*.json ./
 RUN npm ci --omit=dev
 
-# Copy Prisma schema and generate client
+# Copy Prisma config and schema (Prisma 7)
+COPY server/prisma.config.ts ./
 COPY server/prisma ./prisma
+
+# Generate Prisma client for production
 RUN npx prisma generate
 
 # Copy built backend
 COPY --from=backend-builder /app/dist ./dist
+
+# Copy generated Prisma client
+COPY --from=backend-builder /app/generated ./generated
 
 # Copy built frontend to public folder (served by Express)
 COPY --from=frontend-builder /app/dist ./public

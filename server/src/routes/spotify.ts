@@ -2,6 +2,11 @@ import { Router } from 'express';
 
 const router = Router();
 
+interface SpotifyOEmbedResponse {
+  title?: string;
+  description?: string;
+}
+
 // POST /api/spotify/info - Extract song info from Spotify URL
 router.post('/info', async (req, res) => {
   try {
@@ -27,7 +32,7 @@ router.post('/info', async (req, res) => {
       return res.status(404).json({ error: 'Track not found' });
     }
 
-    const data = await response.json();
+    const data = (await response.json()) as SpotifyOEmbedResponse;
 
     // Parse title from oEmbed (format: "Track Name" by "Artist Name")
     // The title field contains "Song Name" and provider_name may have artist info
