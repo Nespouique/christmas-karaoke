@@ -3,7 +3,7 @@ import { SpinningWheel } from '@/components/SpinningWheel';
 import type { SpinningWheelHandle } from '@/components/SpinningWheel';
 import { WinnerModal } from '@/components/WinnerModal';
 import { Snowfall } from '@/components/Snowfall';
-import { getRandomPunchline } from '@/lib/supabase-storage';
+import { getRandomPunchline } from '@/lib/api';
 import type { Participant, Song } from '@/types';
 
 interface WheelTabProps {

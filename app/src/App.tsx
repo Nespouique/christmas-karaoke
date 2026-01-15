@@ -8,15 +8,15 @@ import { ParticipantsTab } from '@/components/tabs/ParticipantsTab';
 import { SongsTab } from '@/components/tabs/SongsTab';
 import { TabHeader } from '@/components/TabHeader';
 import type { Participant, Song } from '@/types';
-import { 
-  fetchParticipants, 
-  createParticipant, 
-  updateParticipant, 
+import {
+  fetchParticipants,
+  createParticipant,
+  updateParticipant,
   deleteParticipant,
   fetchSongs,
   createSong,
   deleteSong
-} from '@/lib/supabase-storage';
+} from '@/lib/api';
 import './App.css';
 
 function App() {

@@ -1,0 +1,36 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Participant {
+  id        String   @id @default(uuid())
+  name      String
+  photoUrl  String?  @map("photo_url")
+  color     String   @default("#E53935")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("participants")
+}
+
+model Song {
+  id         String   @id @default(uuid())
+  title      String
+  artist     String
+  spotifyUrl String   @map("spotify_url")
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  @@map("songs")
+}
+
+model Punchline {
+  id        String   @id @default(uuid())
+  text      String
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("punchlines")
+}

@@ -8,7 +8,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { isValidSpotifyUrl } from '@/lib/supabase-storage';
+import { isValidSpotifyUrl } from '@/lib/api';
 import { Loader2 } from 'lucide-react';
 
 interface SongModalProps {
@@ -17,26 +17,25 @@ interface SongModalProps {
   onSave: (title: string, artist: string, spotifyUrl: string) => void;
 }
 
-// Extract song info via Supabase Edge Function (avoids CORS)
+const API_URL = import.meta.env.VITE_API_URL || '';
+
+// Extract song info via backend API
 async function fetchSpotifyInfo(url: string): Promise<{ title: string; artist: string } | null> {
   try {
-    const response = await fetch(
-      'https://frhngmquudixcxhabdvl.supabase.co/functions/v1/spotify-info',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ url }),
-      }
-    );
-    
+    const response = await fetch(`${API_URL}/api/spotify/info`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ url }),
+    });
+
     if (!response.ok) return null;
-    
+
     const data = await response.json();
     return {
       title: data.title || '',
-      artist: data.artist || ''
+      artist: data.artist || '',
     };
   } catch {
     return null;

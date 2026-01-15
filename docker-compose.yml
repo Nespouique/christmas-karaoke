@@ -1,0 +1,56 @@
+services:
+  app:
+    build: .
+    container_name: christmas-karaoke-app
+    ports:
+      - "80:3001"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      - DATABASE_URL=postgresql://postgres:${POSTGRES_PASSWORD:-karaoke_secret}@postgres:5432/karaoke
+      - NODE_ENV=production
+      - PORT=3001
+    restart: unless-stopped
+    networks:
+      - karaoke-network
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: christmas-karaoke-db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=karaoke
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-karaoke_secret}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d karaoke"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+    networks:
+      - karaoke-network
+
+  prisma-studio:
+    build: .
+    container_name: christmas-karaoke-studio
+    command: npx prisma studio --port 5555 --browser none
+    ports:
+      - "5555:5555"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      - DATABASE_URL=postgresql://postgres:${POSTGRES_PASSWORD:-karaoke_secret}@postgres:5432/karaoke
+    restart: unless-stopped
+    networks:
+      - karaoke-network
+
+volumes:
+  postgres_data:
+
+networks:
+  karaoke-network:
+    driver: bridge

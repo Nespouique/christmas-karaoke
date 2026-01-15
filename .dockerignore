@@ -1,9 +1,11 @@
 # Dependencies
 app/node_modules
+server/node_modules
 node_modules
 
 # Build output
 app/dist
+server/dist
 dist
 
 # Git
@@ -20,6 +22,7 @@ dist
 README.md
 SpecsNoel.md
 Wireframes
+Todo.md
 
 # Logs
 *.log
@@ -29,7 +32,10 @@ npm-debug.log*
 .DS_Store
 Thumbs.db
 
-# Environment files (handled via build args)
+# Environment files
 .env
 .env.*
 !.env.example
+
+# Plans
+.claude

@@ -5,7 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Gift, Music, Snowflake, TreePine, Star, Sparkles } from 'lucide-react';
 import type { Participant, Song } from '@/types';
-import { getRandomSong } from '@/lib/supabase-storage';
+import { getRandomSong } from '@/lib/api';
 
 interface WinnerModalProps {
   winner: Participant | null;

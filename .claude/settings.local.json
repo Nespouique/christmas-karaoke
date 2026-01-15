@@ -5,7 +5,8 @@
       "Bash(claude mcp add lucide-icons npx lucide-icons-mcp --stdio)",
       "Bash(npx shadcn@latest add alert-dialog:*)",
       "Bash(npm install:*)",
-      "Bash(npm run build:*)"
+      "Bash(npm run build:*)",
+      "Bash(git -C /d/Elliot/Documents/git/christmas-karaoke log --oneline)"
     ]
   },
   "enableAllProjectMcpServers": true,
