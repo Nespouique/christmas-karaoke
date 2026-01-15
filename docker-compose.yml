@@ -1,9 +1,22 @@
 services:
-  app:
+  # Frontend (Nginx serving static files + reverse proxy to backend)
+  frontend:
     build: .
-    container_name: christmas-karaoke-app
+    container_name: christmas-karaoke
     ports:
-      - "80:3001"
+      - "80:80"
+    depends_on:
+      - server
+    restart: unless-stopped
+    networks:
+      - karaoke-network
+
+  # Backend API (Express + Prisma)
+  server:
+    build: ./server
+    container_name: christmas-karaoke-server
+    expose:
+      - "3001"
     depends_on:
       postgres:
         condition: service_healthy
@@ -15,6 +28,7 @@ services:
     networks:
       - karaoke-network
 
+  # PostgreSQL database
   postgres:
     image: postgres:16-alpine
     container_name: christmas-karaoke-db
@@ -33,8 +47,9 @@ services:
     networks:
       - karaoke-network
 
+  # Prisma Studio (database admin UI)
   prisma-studio:
-    build: .
+    build: ./server
     container_name: christmas-karaoke-studio
     command: npx prisma studio --port 5555 --browser none
     ports:

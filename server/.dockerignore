@@ -1,13 +1,9 @@
 # Dependencies
-app/node_modules
 node_modules
 
 # Build output
-app/dist
 dist
-
-# Server folder (has its own Dockerfile)
-server
+generated
 
 # Git
 .git
@@ -18,12 +14,6 @@ server
 .idea
 *.swp
 *.swo
-
-# Documentation
-README.md
-SpecsNoel.md
-Wireframes
-Todo.md
 
 # Logs
 *.log
@@ -37,6 +27,3 @@ Thumbs.db
 .env
 .env.*
 !.env.example
-
-# Plans
-.claude
